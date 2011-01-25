@@ -89,4 +89,17 @@ class TestCrdSpec < Test::Unit::TestCase
       assert_equal( [ 'test/fixtures' ], s.library_paths )
     end
   end
+  # source paths is empty array
+  def test_source_paths_is_empty_array
+    Crd::Spec.new 'Testing' do |s|
+      assert_equal( [ ], s.source_paths )
+    end
+  end
+  # can add paths to source paths
+  def test_can_add_paths_to_source_paths
+    Crd::Spec.new 'Testing' do |s|
+      s.source_paths << 'test/fixtures'
+      assert_equal( [ 'test/fixtures' ], s.source_paths )
+    end
+  end
 end

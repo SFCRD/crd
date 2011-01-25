@@ -8,6 +8,11 @@ class TestCrdTarget < Test::Unit::TestCase
   # test constants
   GOOD = 'test/fixtures/target/Input.as'
   BAD = 'test/fixtures/target/Missing.as'
+  # no filename in constructor gives default value to filename
+  def test_no_filename_in_constructor_gives_default_value_to_filename
+    t = Crd::Target.new
+    assert_equal( Crd::Target::NOT_SET, t.filename )
+  end
   # accepts filename in constructor
   def test_accepts_filename_in_constructor
     t = Crd::Target.new GOOD

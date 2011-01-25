@@ -2,9 +2,10 @@
 
 module Crd
   class Target
+    NOT_SET = 'Target not set'
     attr_reader :filename
-    def initialize( filename )
-      @filename = filename
+    def initialize( filename=nil )
+      @filename = filename || NOT_SET
     end
     def dirname
       File.dirname filename
