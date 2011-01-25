@@ -14,17 +14,18 @@ __END__
 require 'crd'
 
 main = Crd::Spec.new 'Main' do |s|
-  s.input 'Main.as'
-  s.output 'Main.swf'
+  s.input = 'Main.as'
+  s.output = 'Main.swf'
   
   s.source_path <<
 end
 
 desc "Compiles the Main spec"
 task :compile do
-  Crd::Flex4::Mxmlc.new main do |c|
+  Crd::Flex::Mxmlc.new main do |c|
     
+    c.static_link_runtime_shared_libraries = true
     
-    
+    c.run!
   end
 end
