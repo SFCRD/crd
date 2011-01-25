@@ -115,4 +115,23 @@ class TestCrdFlex < Test::Unit::TestCase
       assert_equal( 'mxmlc -source-paths+=src,lib/src -library-paths+=lib/bin', s.to_cmd )
     end
   end
+  # run runs the command and returns the output
+  def test_run_runs_the_command_and_returns_the_output
+    Crd::Flex::Command.new 'echo' do |s|
+      s.output = 'Main.swf'
+      assert_equal( '-output=Main.swf', s.run! )
+    end
+  end
+  # found returns true for commands found in path
+  def test_found_returns_true_for_commands_found_in_path
+    Crd::Flex::Command.new 'mxmlc' do |s|
+      assert_equal( true, s.found? )
+    end
+  end
+  # found returns false for commands not found in path
+  def test_found_returns_false_for_commands_not_found_in_path
+    Crd::Flex::Command.new 'madeupcommandname' do |s|
+      assert_equal( false, s.found? )
+    end
+  end
 end

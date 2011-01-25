@@ -21,6 +21,12 @@ module Crd
           end
         end
       end
+      def run!
+        `#{to_cmd}`.chomp
+      end
+      def found?
+        File.exist? `which #{command}`.chomp
+      end
       def has?( argument )
         @arguments.has_key? argument
       end
