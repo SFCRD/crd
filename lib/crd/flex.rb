@@ -4,9 +4,12 @@ module Crd
   module Flex
     class Command
       attr_reader :command
-      def initialize( command )
+      def initialize( command, options={} )
         @command = command
         @arguments = Hash.new { |h, k| h[ k ] = [ ] }
+        options.each do |key, value|
+          @arguments[ key ] = value
+        end
         yield self if block_given?
       end
       def to_cmd

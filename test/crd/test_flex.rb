@@ -134,4 +134,12 @@ class TestCrdFlex < Test::Unit::TestCase
       assert_equal( false, s.found? )
     end
   end
+  # can pass hash to constructor and have arguments be created before passing to block
+  def test_can_pass_hash_to_constructor_and_have_arguments_be_created_before_passing_to_block
+    opts = { :output => 'Main.swf', :library_paths => [ 'libs/bin', 'libs/swc' ] }
+    Crd::Flex::Command.new 'mxmlc', opts do |s|
+      assert_equal( 'Main.swf', s.output )
+      assert_equal( [ 'libs/bin', 'libs/swc' ], s.library_paths )
+    end
+  end
 end
