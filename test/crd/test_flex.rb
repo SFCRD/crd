@@ -65,29 +65,33 @@ class TestCrdFlex < Test::Unit::TestCase
   # retrieving new argument before assignment gives empty array
   def test_retrieving_new_argument_before_assignment_gives_empty_array
     Crd::Flex::Command.new 'mxmlc' do |s|
-      assert_equal( [ ], s.library_paths )
+      assert_equal( [ ], s.library_path )
     end
   end
   # can easily build arrays when accessing by default
   def test_can_easily_build_arrays_when_accessing_by_default
     Crd::Flex::Command.new 'mxmlc' do |s|
-      s.library_paths << 'lib/bin'
-      s.library_paths << 'lib/swc'
-      assert_equal( [ 'lib/bin', 'lib/swc' ], s.library_paths )
+      s.library_path << 'lib/bin'
+      s.library_path << 'lib/swc'
+      assert_equal( [ 'lib/bin', 'lib/swc' ], s.library_path )
     end
   end
   # assembles one string argument into cmd
   def test_assembles_one_string_argument_into_cmd
     Crd::Flex::Command.new 'mxmlc' do |s|
       s.output = 'Main.swf'
-      assert_equal( 'mxmlc -output=Main.swf', s.to_cmd )
+      cmd = s.to_cmd.split( /\s+/ )
+      assert_equal( 'mxmlc', cmd.shift )
+      assert( cmd.include?( '-output=Main.swf' ), 'Could not find argument in to_cmd' )
     end
   end
   # converts argument names with underscores to hyphens
   def test_converts_argument_names_with_underscores_to_hyphens
     Crd::Flex::Command.new 'mxmlc' do |s|
       s.static_link_runtime_shared_libraries = true
-      assert_equal( 'mxmlc -static-link-runtime-shared-libraries=true', s.to_cmd )
+      cmd = s.to_cmd.split( /\s+/ )
+      assert_equal( 'mxmlc', cmd.shift )
+      assert( cmd.include?( '-static-link-runtime-shared-libraries=true' ), 'Could not find argument in to_cmd' )
     end
   end
   # assembles two string arguments into cmd
@@ -95,24 +99,32 @@ class TestCrdFlex < Test::Unit::TestCase
     Crd::Flex::Command.new 'mxmlc' do |s|
       s.output = 'Main.swf'
       s.static_link_runtime_shared_libraries = true
-      assert_equal( 'mxmlc -output=Main.swf -static-link-runtime-shared-libraries=true', s.to_cmd )
+      cmd = s.to_cmd.split( /\s+/ )
+      assert_equal( 'mxmlc', cmd.shift )
+      assert( cmd.include?( '-output=Main.swf' ), 'Could not find argument in to_cmd' )
+      assert( cmd.include?( '-static-link-runtime-shared-libraries=true' ), 'Could not find argument in to_cmd' )
     end
   end
   # assembles one array argument into cmd
   def test_assembles_one_array_argument_into_cmd
     Crd::Flex::Command.new 'mxmlc' do |s|
-      s.source_paths << 'src'
-      s.source_paths << 'lib/src'
-      assert_equal( 'mxmlc -source-paths+=src,lib/src', s.to_cmd )
+      s.source_path << 'src'
+      s.source_path << 'lib/src'
+      cmd = s.to_cmd.split( /\s+/ )
+      assert_equal( 'mxmlc', cmd.shift )
+      assert( cmd.include?( '-source-path+=src,lib/src' ), 'Could not find argument in to_cmd' )
     end
   end
   # assembles two array arguments into cmd
   def test_assembles_two_array_arguments_into_cmd
     Crd::Flex::Command.new 'mxmlc' do |s|
-      s.source_paths << 'src'
-      s.source_paths << 'lib/src'
-      s.library_paths << 'lib/bin'
-      assert_equal( 'mxmlc -source-paths+=src,lib/src -library-paths+=lib/bin', s.to_cmd )
+      s.source_path << 'src'
+      s.source_path << 'lib/src'
+      s.library_path << 'lib/bin'
+      cmd = s.to_cmd.split( /\s+/ )
+      assert_equal( 'mxmlc', cmd.shift )
+      assert( cmd.include?( '-source-path+=src,lib/src' ), 'Could not find argument in to_cmd' )
+      assert( cmd.include?( '-library-path+=lib/bin' ), 'Could not find argument in to_cmd' )
     end
   end
   # run runs the command and returns the output
@@ -136,10 +148,18 @@ class TestCrdFlex < Test::Unit::TestCase
   end
   # can pass hash to constructor and have arguments be created before passing to block
   def test_can_pass_hash_to_constructor_and_have_arguments_be_created_before_passing_to_block
-    opts = { :output => 'Main.swf', :library_paths => [ 'libs/bin', 'libs/swc' ] }
+    opts = { :output => 'Main.swf', :library_path => [ 'libs/bin', 'libs/swc' ] }
     Crd::Flex::Command.new 'mxmlc', opts do |s|
       assert_equal( 'Main.swf', s.output )
-      assert_equal( [ 'libs/bin', 'libs/swc' ], s.library_paths )
+      assert_equal( [ 'libs/bin', 'libs/swc' ], s.library_path )
+    end
+  end
+  # does not print argument for empty array
+  def test_does_not_print_argument_for_empty_array
+    Crd::Flex::Command.new 'echo' do |s|
+      s.library_path = [ ]
+      assert_equal( [ ], s.library_path )
+      assert_no_match( /-library-path/, s.to_cmd )
     end
   end
 end

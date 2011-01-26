@@ -4,13 +4,13 @@ module Crd
   module Flex
     class Mxmlc < Command
       def initialize( spec )
+        @spec = spec
         super 'mxmlc',
         {
-          :output        => spec.output.filename, 
-          :source_paths  => [ spec.input.dirname, spec.source_paths ].flatten,
-          :library_paths => spec.library_paths
+          :output       => spec.output.filename,
+          :source_path  => [ spec.input.dirname, spec.source_path ].flatten,
+          :library_path => spec.library_path
         }
-        @spec = spec
       end
       def to_cmd
         super << " #{@spec.input.filename}"

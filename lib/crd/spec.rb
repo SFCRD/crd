@@ -6,13 +6,13 @@ module Crd
   class Spec
     UNNAMED = 'Un-named spec'
     
-    attr_reader :name, :input, :output, :source_paths, :library_paths
+    attr_reader :name, :input, :output, :source_path, :library_path
     def initialize( name=nil )
-      @name          = name || UNNAMED
-      @input         = nil
-      @output        = nil
-      @source_paths  = [ ]
-      @library_paths = [ ]
+      @name         = name || UNNAMED
+      @input        = nil
+      @output       = nil
+      @source_path  = [ ]
+      @library_path = [ ]
       yield self if block_given?
     end
     def input=( filename )

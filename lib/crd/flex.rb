@@ -15,10 +15,13 @@ module Crd
       def to_cmd
         "#{command}".tap do |c|
           @arguments.each_pair do |name, value|
-            c << " -#{name.to_s.gsub( /_+/, '-' )}"
             if value.is_a? Array
-              c << "+=#{value.join( ',' )}"
+              if value.any?
+                c << " -#{name.to_s.gsub( /_+/, '-' )}"
+                c << "+=#{value.join( ',' )}"
+              end
             else
+              c << " -#{name.to_s.gsub( /_+/, '-' )}"
               c << "=#{value}"
             end
           end

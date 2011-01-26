@@ -76,30 +76,30 @@ class TestCrdSpec < Test::Unit::TestCase
       assert_nothing_raised( RuntimeError ) { s.output = filename }
     end
   end
-  # library paths is empty array
-  def test_library_paths_is_empty_array
+  # library path is empty array
+  def test_library_path_is_empty_array
     Crd::Spec.new 'Testing' do |s|
-      assert_equal( [ ], s.library_paths )
+      assert_equal( [ ], s.library_path )
     end
   end
-  # can add paths to library paths
-  def test_can_add_paths_to_library_paths
+  # can add paths to library path
+  def test_can_add_paths_to_library_path
     Crd::Spec.new 'Testing' do |s|
-      s.library_paths << 'test/fixtures'
-      assert_equal( [ 'test/fixtures' ], s.library_paths )
+      s.library_path << 'test/fixtures'
+      assert_equal( [ 'test/fixtures' ], s.library_path )
     end
   end
-  # source paths is empty array
-  def test_source_paths_is_empty_array
+  # source path is empty array
+  def test_source_path_is_empty_array
     Crd::Spec.new 'Testing' do |s|
-      assert_equal( [ ], s.source_paths )
+      assert_equal( [ ], s.source_path )
     end
   end
-  # can add paths to source paths
-  def test_can_add_paths_to_source_paths
+  # can add paths to source path
+  def test_can_add_paths_to_source_path
     Crd::Spec.new 'Testing' do |s|
-      s.source_paths << 'test/fixtures'
-      assert_equal( [ 'test/fixtures' ], s.source_paths )
+      s.source_path << 'test/fixtures'
+      assert_equal( [ 'test/fixtures' ], s.source_path )
     end
   end
 end
