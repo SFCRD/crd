@@ -11,15 +11,15 @@ The gem could also install a `crd` CLI for project generation and scaffolding.
 
 - TODO: Flex SDK tasks
 
-	- `mxmlc` => compile a given spec (will be used for release swf and test suite)
+	- *`mxmlc` => compile a given spec (will be used for release swf and test suite)*
 	
-	- `asdoc` => generate documentation for a project
+	- *`asdoc` => generate documentation for a project*
 	
 	- `manifest` => generate source manifest
 	
 	- `config` => generate custom flex-config file for a spec
 	
-	- `compc` => compile a project into a swc
+	- *`compc` => compile a project into a swc*
 	
 	- `headers` => correct source file headers
 	

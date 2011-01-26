@@ -16,7 +16,7 @@ module Crd
 =begin rdoc
   The version number of the Crd project.
 =end
-  VERSION = '0.0.1'
+  VERSION = '0.0.3'
 end
 
 =begin rdoc
