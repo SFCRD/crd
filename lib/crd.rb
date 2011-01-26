@@ -8,6 +8,7 @@ require 'crd/flex'
 require 'crd/flex/mxmlc'
 require 'crd/flex/asdoc'
 require 'crd/flex/compc'
+require 'crd/flex/manifest'
 
 =begin rdoc
   Base module namespace for Crd. Contains the version.
@@ -51,5 +52,18 @@ def compc( spec )
   Crd::Flex::Compc.new spec do |cmd|
     yield cmd if block_given?
     cmd.run!
+  end
+end
+
+=begin rdoc
+  Generates a source manifest xml for a given spec.
+  The output file is placed beside the spec's input file with the
+  extension '-manifest.xml'.
+=end
+def manifest( spec )
+  Crd::Flex::Manifest.new spec do |man|
+    File.open man.output, 'w' do |f|
+      f << man.to_xml
+    end
   end
 end

@@ -33,4 +33,9 @@ class TestCrdTarget < Test::Unit::TestCase
     t = Crd::Target.new BAD
     assert_equal( false, t.exists? )
   end
+  # basename is accurate
+  def test_basename_is_accurate
+    t = Crd::Target.new GOOD
+    assert_equal( 'Input', t.basename )
+  end
 end

@@ -32,7 +32,12 @@ task :swc do
   compc spec
 end
 
+desc "Generates manifest XML"
+task :manifest do
+  manifest spec
+end
+
 namespace :kick do
   desc "Kicks some ass"
-  task :ass => [ :compile, :asdoc, :swc ]
+  task :ass => [ :manifest, :compile, :asdoc, :swc ]
 end

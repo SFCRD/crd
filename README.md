@@ -30,3 +30,9 @@ The gem could also install a `crd` CLI for project generation and scaffolding.
 	- `compile` => compile source with Google Closure Compiler
 	
 	- `lint` => validate source with js-lint
+
+- TODO: Generic code tasks
+
+	- `decruft` => remove diff cruft from source files
+
+- MAYBE: Add (colorized) output for tasks?

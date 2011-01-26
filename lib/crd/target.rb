@@ -10,6 +10,9 @@ module Crd
     def dirname
       File.dirname filename
     end
+    def basename
+      File.basename( filename, File.extname( filename ) )
+    end
     def exists?
       File.exist? filename
     end
