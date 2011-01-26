@@ -15,7 +15,7 @@ The gem could also install a `crd` CLI for project generation and scaffolding.
 	
 	- *`asdoc` => generate documentation for a project*
 	
-	- `manifest` => generate source manifest
+	- *`manifest` => generate source manifest*
 	
 	- `config` => generate custom flex-config file for a spec
 	
