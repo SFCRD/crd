@@ -13,7 +13,7 @@ module Crd
         }
       end
       def to_cmd
-        super << " #{@spec.input.filename}"
+        "#{super} #{@spec.input.filename}"
       end
     end
   end

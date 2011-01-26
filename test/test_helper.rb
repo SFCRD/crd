@@ -8,5 +8,4 @@ require 'crd/test_spec'
 require 'crd/test_flex'
 
 require 'crd/flex/test_mxmlc'
-
-
+require 'crd/flex/test_asdoc'

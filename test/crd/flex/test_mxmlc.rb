@@ -1,10 +1,10 @@
 #!/usr/bin/env ruby -wKU
 
-require "test/unit"
+require 'test/unit'
 
 require 'crd/flex'
 require 'crd/spec'
-require "crd/flex/mxmlc"
+require 'crd/flex/mxmlc'
 
 class TestCrdFlexMxmlc < Test::Unit::TestCase
   # setup
