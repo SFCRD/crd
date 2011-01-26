@@ -5,10 +5,12 @@ require 'crd/target'
 module Crd
   class Spec
     UNNAMED = 'Un-named spec'
+    UNVERSIONED = 'Unversioned'
     
-    attr_reader :name, :input, :output, :source_path, :library_path
-    def initialize( name=nil )
+    attr_reader :name, :version, :input, :output, :source_path, :library_path
+    def initialize( name=nil, version=nil )
       @name         = name || UNNAMED
+      @version      = version || UNVERSIONED
       @input        = nil
       @output       = nil
       @source_path  = [ ]

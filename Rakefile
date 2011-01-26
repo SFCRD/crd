@@ -8,24 +8,31 @@ task :test do
   require 'test_helper'
 end
 
-__END__
-# sandbox below here
-
 require 'crd'
 
-main = Crd::Spec.new 'Main' do |s|
-  s.input = 'Main.as'
-  s.output = 'Main.swf'
-  
-  s.source_path <<
+spec = Crd::Spec.new 'Main', '0.0.1' do |s|
+  s.input   = 'src/Main.as'
+  s.output  = 'src/Output.swf'
 end
 
-desc "Compiles the Main spec"
+desc "Compiles something"
 task :compile do
-  Crd::Flex::Mxmlc.new main do |c|
-    
-    c.static_link_runtime_shared_libraries = true
-    
-    c.run!
+  mxmlc spec
+end
+
+desc "Generates documentation"
+task :asdoc do
+  asdoc spec do |c|
+    c.output = 'src/docs'
   end
+end
+
+desc "Generates SWC"
+task :swc do
+  compc spec
+end
+
+namespace :kick do
+  desc "Kicks some ass"
+  task :ass => [ :compile, :asdoc, :swc ]
 end

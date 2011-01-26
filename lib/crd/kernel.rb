@@ -8,3 +8,9 @@ class Symbol
     to_s.sub( /=$/, '' ).to_sym
   end
 end
+
+class String
+  def slug
+    self.downcase.gsub( /\W+/, '-' ).gsub( /(^-|-$)/, '' )
+  end
+end

@@ -9,3 +9,4 @@ require 'crd/test_flex'
 
 require 'crd/flex/test_mxmlc'
 require 'crd/flex/test_asdoc'
+require 'crd/flex/test_compc'

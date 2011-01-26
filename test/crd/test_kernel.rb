@@ -22,3 +22,18 @@ class TestSymbol < Test::Unit::TestCase
     assert_equal( :test, :test=.base )
   end
 end
+
+class TestString < Test::Unit::TestCase
+  # slug returns a downcased version of single word
+  def test_slug_returns_a_downcased_version_of_single_word
+    assert_equal( 'hello', 'Hello'.slug )
+  end
+  # slug returns a downcased version of multiple words connected with hyphens
+  def test_slug_returns_a_downcased_version_of_multiple_words_connected_with_hyphens
+    assert_equal( 'hello-world-yo', 'Hello WOrld YO'.slug )
+  end
+  # slug removes any characters that are not word characters or hyphens
+  def test_slug_removes_any_characters_that_are_not_word_characters_or_hyphens
+    assert_equal( 'hello-world-yo', '**Hello, WORld @#$ Yo!'.slug )
+  end
+end

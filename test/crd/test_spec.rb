@@ -23,7 +23,6 @@ class TestCrdSpec < Test::Unit::TestCase
   end
   # default name is set if no name is provided in constructor
   def test_default_name_is_set_if_no_name_is_provided_in_constructor
-    assert_equal( 'Un-named spec', Crd::Spec::UNNAMED )
     Crd::Spec.new do |s|
       assert_equal( Crd::Spec::UNNAMED, s.name )
     end
@@ -32,6 +31,18 @@ class TestCrdSpec < Test::Unit::TestCase
   def test_accepts_name_through_constructor
     Crd::Spec.new 'Testing' do |s|
       assert_equal( 'Testing', s.name )
+    end
+  end
+  # default version is set if no version is provided in constructor
+  def test_default_version_is_set_if_no_version_is_provided_in_constructor
+    Crd::Spec.new 'Testing' do |s|
+      assert_equal( Crd::Spec::UNVERSIONED, s.version )
+    end
+  end
+  # accepts version through constructor
+  def test_accepts_version_through_constructor
+    Crd::Spec.new 'Testing', '1.0.4' do |s|
+      assert_equal( '1.0.4', s.version )
     end
   end
   # input target is nil
